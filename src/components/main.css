@@ -38,42 +38,7 @@ body {
   padding: 10px 20px;
   grid-template-rows: 4rem;
 }
-.task-container {
-  display: flex;
-}
 
-.form-task {
-  display: flex;
-  justify-items: center;
-  width: 100%;
-  height: 30%;
-  justify-content: center;
-  /* background-color: red; */
-}
-
-.form-task input[type="text"] {
-  height: 2em;
-  border: 1px solid var(--border-box);
-  border-radius: var(--border-radius);
-  margin-left: 46px;
-  background: var(--default-back);
-  color: var(--fg-color);
-  transition: 80ms cubic-bezier(0.33, 1, 0.68, 1);
-  transition-property: color, background-color, box-shadow, border-color;
-  width: 370px;
-}
-.label-task {
-  color: var(--fg-color);
-  margin: 0 10px;
-  font-size: 30px;
-  text-align: center;
-  height: 30px;
-  cursor: pointer;
-}
-.label-task:hover {
-  background-color: var(--border-box);
-  border-radius: var(--border-radius);
-}
 .date-container {
   width: 100%;
   margin-top: 15px;
@@ -83,42 +48,4 @@ body {
 .date {
   margin-top: 10px;
   text-align: center;
-}
-.task-list {
-  margin-top: 20px;
-}
-.task-list li {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px 10px;
-  transition: 0.2s all;
-}
-
-.edit-task {
-  margin-right: 10px;
-}
-.edit-task,
-.remove-task {
-  font-size: 20px;
-  font-weight: 500;
-  cursor: pointer;
-  padding: 3px;
-}
-
-.remove-task:hover,
-.edit-task:hover {
-  background-color: var(--ligh-back);
-  border-radius: var(--border-radius);
-}
-
-.task-list li:hover {
-  background-color: var(--border-box);
-  border-radius: var(--border-radius);
-}
-
-.action-task{
-  display: flex;
-  align-items: center;
 }

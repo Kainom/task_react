@@ -1,0 +1,44 @@
+.task-list {
+    margin-top: 20px;
+  }
+  .task-list li {
+    display: flex;
+      flex-wrap: wrap;
+    align-items:center;
+    justify-content: space-between;
+    padding: 5px 10px;
+    transition: 0.2s all;
+  }
+  
+  .edit-task {
+    margin-right: 10px;
+  }
+  .edit-task,
+  .remove-task {
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 3px;
+    grid-column: 2;
+  }
+  
+  .remove-task:hover,
+  .edit-task:hover {
+    background-color: var(--ligh-back);
+    border-radius: var(--border-r   adius);
+  }
+  
+  .task-list li:hover {
+    background-color: var(--border-box);
+    border-radius: var(--border-radius);
+  }
+  
+  .action-task{
+    display: flex;
+    align-items: center;
+  }
+  
+  .task{
+    display: flex;
+    flex-wrap: wrap;
+  }

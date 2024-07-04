@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "./main.css";
-import { MdAdd } from "react-icons/md";
-import { TiDeleteOutline } from "react-icons/ti";
-import { FaRegEdit } from "react-icons/fa";
-import moment from "moment";
+import axios from "axios";
+import moment from "moment"; 
+import Form from "./Form";
+import Tasks from "./Tasks";
 
 function date() {
   const data = new Date();
@@ -28,7 +28,14 @@ export default class Main extends Component {
     e.preventDefault();
     const { tasks } = this.state;
     let { newTask } = this.state;
+
+    if (newTask === "") return;
     newTask = newTask.trim();
+
+    if (newTask.length >= 61) {
+      alert("A tarefa não pode ter mais de 60 caracteres.");
+      return;
+    }
 
     if (tasks.indexOf(newTask) != -1) return;
 
@@ -64,51 +71,59 @@ export default class Main extends Component {
     });
   };
 
+  componentDidMount() {
+    const tasks = JSON.parse(localStorage.getItem("tasks"));
+
+    this.setState({
+      tasks: tasks,
+    });
+  }
+
+  componentDidUpdate(preveProps, prevState) {
+    const { tasks } = this.state;
+
+    if (tasks === prevState.tasks) return;
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }
+
   handleEdit = (e, index) => {
     const { tasks } = this.state;
     e.target.parentElement.parentElement.style.backgroundColor = "#30363d";
-    e.target.parentElement.parentElement.style.borderRadius= "0.375rem";
+    e.target.parentElement.parentElement.style.borderRadius = "0.375rem";
     this.setState({
       newTask: tasks[index],
       index,
     });
   };
 
+  get() {
+    axios
+      .get(
+        // "https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyCxwlC8UCw7cqF0aNQv0hshu1sGlDgKqGE"
+        "https://www.googleapis.com/books/v1/volumes/?q=Sherlock"
+      )
+      .then((e) => console.log(e.data.items))
+      .catch((error) => console.log(error));
+  }
+
   render() {
+    this.get();
     const { newTask, tasks } = this.state;
     return (
       <div className="container">
-        <h1 className="list-title">Learn React</h1>
-        <div className="task-container">
-          <form onSubmit={this.handleSubmit} className="form-task" action="#">
-            <input
-              onChange={this.handleChange}
-              type="text"
-              value={newTask}
-            ></input>
-            <button id="add-task" hidden type="submit"></button>
-            <label className="label-task" htmlFor="add-task">
-              <MdAdd />
-            </label>
-          </form>
-        </div>
-        <ul className="task-list">
-          {tasks.map((task, index) => (
-            <li key={task}>
-              {task}
-              <span className="action-task">
-                <FaRegEdit
-                  onClick={(e) => this.handleEdit(e, index)}
-                  className="edit-task"
-                />
-                <TiDeleteOutline
-                  onClick={(e) => this.handleDelet(e, index)}
-                  className="remove-task"
-                />
-              </span>
-            </li>
-          ))}
-        </ul>
+        <h1 className="list-title">Make your task</h1>
+        <Form
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          newTask={newTask}
+        />
+        <Tasks
+          handleDelet={this.handleDelet}
+          handleEdit={this.handleEdit}
+          tasks={tasks}
+        />
+
         <div className="date-container">
           <h3 className="date">{date()}</h3>
         </div>
