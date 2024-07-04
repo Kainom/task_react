@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./main.css";
-import axios from "axios";
 import moment from "moment"; 
 import Form from "./Form";
 import Tasks from "./Tasks";
@@ -97,18 +96,8 @@ export default class Main extends Component {
     });
   };
 
-  get() {
-    axios
-      .get(
-        // "https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=AIzaSyCxwlC8UCw7cqF0aNQv0hshu1sGlDgKqGE"
-        "https://www.googleapis.com/books/v1/volumes/?q=Sherlock"
-      )
-      .then((e) => console.log(e.data.items))
-      .catch((error) => console.log(error));
-  }
 
   render() {
-    this.get();
     const { newTask, tasks } = this.state;
     return (
       <div className="container">
